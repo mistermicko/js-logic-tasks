@@ -9,3 +9,7 @@ a {
 a:hover {
 	color: #00B7CC;
 }
+h1 {
+	font-size:1.2em;
+	color:blue;
+}
