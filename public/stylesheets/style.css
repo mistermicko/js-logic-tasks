@@ -12,4 +12,5 @@ a:hover {
 h1 {
 	font-size:1.2em;
 	color:blue;
+	font-weight: bold;
 }
