@@ -18,13 +18,29 @@ router.get('/update', function(req, res, next) {
 });
 
 router.post('/update', function(req, res) {
-			text = JSON.stringify(req.body);
+			text = JSON.stringify(req.body,null, '\t');
             fs.appendFile('log.txt', text, function(err) {
                 if (err) {
                     return console.log(err);
                 }
             });
+			
+			var webhook = spawn('./webhook.sh');
+            webhook.stderr.on('data', function(data) {
+                log_error(data);
+                res.status(500).send('stderr: ' + data);
+            });
+			webhook.on('close', function(data) {
+				res.sendStatus(200);
+        });
 
 });
-
+function log_error(new_error) {
+    var error = new Date().toLocaleString() + " - " + new_error.message + "\n";
+    fs.appendFile('error.txt', error, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+}
 module.exports = router;
