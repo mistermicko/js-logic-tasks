@@ -1,0 +1,8 @@
+.env
+.DS_Store
+log.txt
+webhook.sh
+.idea
+node_modules
+npm-debug.log
+
